@@ -5,8 +5,10 @@ services:
     build:
       context: ./backend
     container_name: backend-container
+    deploy:
+      replicas: 4
     ports:
-      - '7000:7000'
+      - '8000:8000'
     environment:
       - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
 
@@ -27,3 +29,29 @@ services:
       - /app/node_modules
     command: npm run dev
     restart: always
+
+  caddy:
+    image: caddy:2
+    container_name: caddy-container
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8000:8000"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - app-network
+    depends_on:
+      - backend
+      - frontend
+    restart: always
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
