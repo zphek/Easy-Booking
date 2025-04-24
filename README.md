@@ -1,4 +1,4 @@
-<h1 align="center">Easy Booking XD</h1>
+<h1 align="center">Easy Booking</h1>
 
          
 <p align="center">
