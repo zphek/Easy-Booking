@@ -1,2 +1,3 @@
 /backend/coverage/
 /backend/newrelic_agent.log
+.env
