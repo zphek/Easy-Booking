@@ -9,6 +9,8 @@ on:
 jobs:
   test_and_deploy:
     runs-on: self-hosted
+    environment: EASY-BOOKING-BE
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
