@@ -19,7 +19,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
+          # Eliminamos la opción de caché que causa problemas
+          # cache: 'npm'
 
       - name: Install backend dependencies
         run: |
