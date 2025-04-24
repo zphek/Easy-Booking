@@ -9,6 +9,8 @@ on:
 jobs:
   test_and_create_pr:
     runs-on: ubuntu-latest
+    environment: EASY-BOOKING-BE
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -26,6 +28,8 @@ jobs:
           npm install
 
       - name: Run Jest tests
+        env:
+          MONGODB_TEST_URI: ${{ secrets.MONGODB_TEST_URI }}
         id: jest_tests
         env:
           MONGODB_TEST_URI: ${{ secrets.MONGODB_TEST_URI }}

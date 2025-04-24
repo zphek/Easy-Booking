@@ -10,14 +10,10 @@ jobs:
   test_and_deploy:
     runs-on: self-hosted
     environment: EASY-BOOKING-BE
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Create .env.test file
-        run: |
-          echo "MONGODB_TEST_URI=${{ secrets.MONGODB_TEST_URI }}" > .env.test
       
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -25,6 +21,8 @@ jobs:
           node-version: '18'
       
       - name: Run backend tests
+        env:
+          MONGODB_TEST_URI: ${{ secrets.MONGODB_TEST_URI }}
         run: |
           cd backend
           npm ci
