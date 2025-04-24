@@ -6,9 +6,7 @@ import cookieParser from 'cookie-parser';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import User from '../../src/models/user';
 import userRoutes from '../../src/routes/user';
-import { afterAll, beforeAll, beforeEach, describe, expect, it, jest } from '@jest/globals';
-
-jest.useRealTimers();
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from '@jest/globals';
 
 describe('User Routes', () => {
   let app: express.Application;

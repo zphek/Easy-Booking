@@ -7,9 +7,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import Hotel from '../../src/models/hotel';
 import User from '../../src/models/user';
 import myBookingsRoutes from '../../src/routes/my-bookings';
-import { afterAll, beforeAll, beforeEach, describe, expect, it, jest } from '@jest/globals';
-
-jest.useRealTimers();
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from '@jest/globals';
 
 describe('My Bookings Routes', () => {
   let app: express.Application;

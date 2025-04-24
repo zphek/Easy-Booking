@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { afterAll, afterEach, beforeAll, jest } from '@jest/globals';
 
 // Configurar variables de entorno para pruebas
+dotenv.config({ path: '.env.test' });
 dotenv.config();
 
 // Incrementar el tiempo de espera para pruebas asíncronas
