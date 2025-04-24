@@ -9,6 +9,8 @@ import User from '../../src/models/user';
 import hotelRoutes from '../../src/routes/hotels';
 import { afterAll, beforeAll, beforeEach, describe, expect, it, jest } from '@jest/globals';
 
+jest.useRealTimers();
+
 describe('Hotel Routes', () => {
   let app: express.Application;
   let mongoServer: MongoMemoryServer;
