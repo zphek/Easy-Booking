@@ -7,11 +7,22 @@ on:
       - main
 
 jobs:
-  deploy:
+  test_and_deploy:
     runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Run backend tests
+        run: |
+          cd backend
+          npm ci
+          npm test
       
       - name: Set up Docker Compose
         run: |
