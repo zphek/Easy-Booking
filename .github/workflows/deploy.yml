@@ -12,6 +12,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Create .env.test file
+        run: |
+          echo "MONGODB_TEST_URI=${{ secrets.MONGODB_TEST_URI }}" > .env.test
       
       - name: Set up Node.js
         uses: actions/setup-node@v3
