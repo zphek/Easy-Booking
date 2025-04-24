@@ -1,19 +1,26 @@
+version: '3'
+
 services:
   backend:
     build:
       context: ./backend
     # deploy:
-    #   replicas: 4
-    ports:
-      - '8002:8000'
+    #   replicas: 3  # Habilité las réplicas para tener múltiples instancias para el load balancing
+    # No exponemos los puertos directamente ya que Caddy se encargará del acceso
+    # ports:
+    #   - '8002:8000'
     environment:
       - MONGODB_CONNECTION_STRING=mongodb+srv://maverickUser:c9f5TdlLZCxDisgO@cluster0.xi11h.mongodb.net/reservation-testing-bd?retryWrites=true&w=majority&appName=Cluster0
-
+      - SERVER_PORT=8000
     volumes:
       - ./backend:/app
       - /app/node_modules
     command: npm run dev
     restart: always
+    networks:
+      - app-network
+    # Para que Caddy identifique cada instancia
+    hostname: "backend-{{.Task.Slot}}"
 
   frontend:
     build:
@@ -25,6 +32,8 @@ services:
       - /app/node_modules
     command: npm run dev
     restart: always
+    networks:
+      - app-network
 
   caddy:
     image: caddy:2
