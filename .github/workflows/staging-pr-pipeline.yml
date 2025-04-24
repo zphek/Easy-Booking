@@ -31,8 +31,6 @@ jobs:
         env:
           MONGODB_TEST_URI: ${{ secrets.MONGODB_TEST_URI }}
         id: jest_tests
-        env:
-          MONGODB_TEST_URI: ${{ secrets.MONGODB_TEST_URI }}
         run: |
           cd backend
           npm test
