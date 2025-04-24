@@ -9,7 +9,6 @@ on:
 jobs:
   test_and_create_pr:
     runs-on: ubuntu-latest
-    environment: EASY-BOOKING-BE
 
     steps:
       - name: Checkout code
