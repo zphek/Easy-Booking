@@ -2,8 +2,8 @@ services:
   backend:
     build:
       context: ./backend
-    deploy:
-      replicas: 4
+    # deploy:
+    #   replicas: 4
     ports:
       - '8002:8000'
     environment:
