@@ -7,7 +7,7 @@ services:
     ports:
       - '8002:8000'
     environment:
-      - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
+      - MONGODB_CONNECTION_STRING=mongodb+srv://maverickUser:c9f5TdlLZCxDisgO@cluster0.xi11h.mongodb.net/reservation-testing-bd?retryWrites=true&w=majority&appName=Cluster0
 
     volumes:
       - ./backend:/app
