@@ -3,7 +3,7 @@ services:
     build:
       context: ./backend
     deploy:
-      replicas: 3  # Número de réplicas para el backend
+      replicas: 2  # Número de réplicas para el backend
     environment:
       - MONGODB_CONNECTION_STRING=mongodb+srv://maverickUser:c9f5TdlLZCxDisgO@cluster0.xi11h.mongodb.net/reservation-testing-bd?retryWrites=true&w=majority&appName=Cluster0
       - SERVER_PORT=8000
