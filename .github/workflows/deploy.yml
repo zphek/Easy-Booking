@@ -1,0 +1,49 @@
+# .github/workflows/docker-compose-deploy.yml
+name: Docker Compose Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Docker Compose
+        run: |
+          # Verifica si Docker y Docker Compose están instalados
+          if ! command -v docker &> /dev/null; then
+            echo "Docker no está instalado. Por favor, instálalo primero."
+            exit 1
+          fi
+          
+          if ! command -v docker-compose &> /dev/null; then
+            echo "Docker Compose no está instalado. Por favor, instálalo primero."
+            exit 1
+          fi
+      
+      - name: Deploy with Docker Compose
+        run: |
+          # Detiene los contenedores existentes si es necesario
+          docker-compose down
+          
+          # Elimina imágenes antiguas si es necesario (opcional)
+          # docker-compose rm -f
+          
+          # Construye y levanta los contenedores
+          docker-compose up -d --build
+          
+      - name: Verify deployment
+        run: |
+          # Espera unos segundos para que los servicios se inicien completamente
+          sleep 10
+          
+          # Verifica que los contenedores estén en ejecución
+          docker-compose ps
+          
+          # Opcional: Añade verificaciones adicionales específicas de tu aplicación
+          # Por ejemplo: curl http://localhost:tu-puerto/health
