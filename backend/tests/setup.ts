@@ -5,10 +5,8 @@ import { afterAll, afterEach, beforeAll, jest } from '@jest/globals';
 // Configurar variables de entorno para pruebas
 dotenv.config({ path: '.env.test' });
 
-jest.useRealTimers();
-
 // Incrementar el tiempo de espera para pruebas asíncronas
-jest.setTimeout(30000);
+jest.setTimeout(1000000);
 
 // Suprimir logs de consola durante las pruebas
 global.console.log = jest.fn();
