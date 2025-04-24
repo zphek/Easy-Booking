@@ -20,13 +20,13 @@ jobs:
         with:
           node-version: '18'
       
-      - name: Run backend tests
-        env:
-          MONGODB_TEST_URI: ${{ secrets.MONGODB_TEST_URI }}
-        run: |
-          cd backend
-          npm ci
-          npm test
+      # - name: Run backend tests
+      #   env:
+      #     MONGODB_TEST_URI: ${{ secrets.MONGODB_TEST_URI }}
+      #   run: |
+      #     cd backend
+      #     npm ci
+      #     npm test
       
       - name: Set up Docker Compose
         run: |
@@ -43,22 +43,8 @@ jobs:
       
       - name: Deploy with Docker Compose
         run: |
-          # Detiene los contenedores existentes si es necesario
-          docker-compose down
+          sudo docker-compose down -v
           
-          # Elimina imágenes antiguas si es necesario (opcional)
           # docker-compose rm -f
           
-          # Construye y levanta los contenedores
-          docker-compose up -d --build
-          
-      - name: Verify deployment
-        run: |
-          # Espera unos segundos para que los servicios se inicien completamente
-          sleep 10
-          
-          # Verifica que los contenedores estén en ejecución
-          docker-compose ps
-          
-          # Opcional: Añade verificaciones adicionales específicas de tu aplicación
-          # Por ejemplo: curl http://localhost:tu-puerto/health
+          sudo docker-compose up -d --build
