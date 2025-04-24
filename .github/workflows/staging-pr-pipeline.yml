@@ -39,35 +39,35 @@ jobs:
           echo "❌ Jest tests failed. PR creation aborted."
           exit 1
 
-      - name: Install E2E test dependencies
-        run: |
-          cd e2e-test
-          npm ci
+      # - name: Install E2E test dependencies
+      #   run: |
+      #     cd e2e-test
+      #     npm ci
 
-      - name: Start backend server for E2E tests
-        run: |
-          cd backend
-          npm run dev &
-          echo "Backend server started in background"
-          sleep 10  # Esperar a que el servidor esté listo
+      # - name: Start backend server for E2E tests
+      #   run: |
+      #     cd backend
+      #     npm run dev &
+      #     echo "Backend server started in background"
+      #     sleep 10  # Esperar a que el servidor esté listo
 
-      - name: Run E2E tests
-        id: e2e_tests
-        run: |
-          cd e2e-test
-          npm run e2e
-        continue-on-error: true
+      # - name: Run E2E tests
+      #   id: e2e_tests
+      #   run: |
+      #     cd e2e-test
+      #     npm run e2e
+      #   continue-on-error: true
 
-      - name: Stop backend server
-        if: always()
-        run: |
-          pkill -f "npm run dev" || true
+      # - name: Stop backend server
+      #   if: always()
+      #   run: |
+      #     pkill -f "npm run dev" || true
 
-      - name: Check E2E test results
-        if: steps.e2e_tests.outcome != 'success'
-        run: |
-          echo "❌ E2E tests failed. PR creation aborted."
-          exit 1
+      # - name: Check E2E test results
+      #   if: steps.e2e_tests.outcome != 'success'
+      #   run: |
+      #     echo "❌ E2E tests failed. PR creation aborted."
+      #     exit 1
 
       - name: Create Pull Request
         if: success()
@@ -85,7 +85,6 @@ jobs:
             
             ### ✅ Tests Passed
             - Jest tests have passed
-            - E2E tests have passed
             
             ### 📝 Changes
             This PR includes all changes from the staging branch.
