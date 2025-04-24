@@ -2,9 +2,16 @@ localhost:8000 {
     log {
         output stdout
     }
+    
     reverse_proxy {
-        to backend-1:8080 // backend-2:8080 backend-3:8080
+        # Dirigir el tráfico al servicio backend con puerto 8000
+        # Docker Compose resolverá este nombre a todas las réplicas
+        to backend:8000
+        
+        # Política de balanceo - round robin por defecto
         lb_policy round_robin
+        
+        # Health check básico
         health_path /health
         health_interval 5s
         health_timeout 2s
