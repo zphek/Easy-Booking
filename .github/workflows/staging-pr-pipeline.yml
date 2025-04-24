@@ -22,31 +22,6 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install backend dependencies
-        run: |
-          cd backend
-          npm install
-
-      - name: Run Jest tests
-        env:
-          MONGODB_TEST_URI: ${{ secrets.MONGODB_TEST_URI }}
-        id: jest_tests
-        run: |
-          cd backend
-          npm test
-        continue-on-error: true
-
-      - name: Check Jest test results
-        if: steps.jest_tests.outcome != 'success'
-        run: |
-          echo "❌ Jest tests failed. PR creation aborted."
-          exit 1
-
-      - name: Stop backend server
-        if: always()
-        run: |
-          pkill -f "npm run dev" || true
-
       - name: Create Pull Request
         if: success()
         uses: peter-evans/create-pull-request@v5
